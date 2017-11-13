@@ -1,7 +1,25 @@
-//Regression Selection Farmer First dataset for EPAR Request 340: Farmer Focus Gender Attitudes
-//Author: Audrey Lawrence
-//Updates: Melissa Greenaway (MLG)
-//Cleaned: Daniel Lunchick-Seymour 10/16/17
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------
+*Title/Purpose 	: This do.file was developed by the Evans School Policy Analysis & Research Group (EPAR) 
+				  for an analysis of the association of gender with risk perceptions and attitudes  
+				  using the 2010 Farmer First household survey collected by TNS International.
+*Author(s)		: Alison Cullen, Audrey Lawrence, Melissa Greenaway, Pierre Biscaye, C. Leigh Anderson, &  Travis Reynolds
+
+*Date			: 10 November 2017
+----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+*Data source
+*-----------
+*The Farmer First household survey was collected in 2010 by TNS International with funding from the Bill & Melinda Gates Foundation.
+*The data were collected in an effort to inform agricultural development interventions based on the motivations of farmers and farm households. 
+*The data are not available online, so we have uploaded the raw survey data for Malian respondents to our GitHub repository for this project:
+*https://github.com/EvansSchoolPolicyAnalysisAndResearch/340-Farmer-First-Gender-Attitudes
+
+*Notes
+*---------
+*The following code analyzes data that is cleaned and prepared in a separate do file. Please refer to that do file for information on how the variables were created.
+
+
+
 
 ********************************************************************************
 clear
