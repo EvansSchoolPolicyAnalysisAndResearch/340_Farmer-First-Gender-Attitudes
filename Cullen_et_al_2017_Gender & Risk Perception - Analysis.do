@@ -24,14 +24,16 @@
 ********************************************************************************
 clear
 **set directories
-global input "R:\Project\EPAR\Archive\340 - Farmer First Gender Attitudes\Analysis\9.22.16 FINAL Analysis\Cleaned do files (Daniel Oct 2017)\Cleaned Analysis Output\Farmer 1st_Jan2011_cleaned_genderscorrected_samesexmarked.dta"
-global output "R:\Project\EPAR\Archive\340 - Farmer First Gender Attitudes\Analysis\9.22.16 FINAL Analysis\Cleaned do files (Daniel Oct 2017)\Cleaned Regression Output"
+global input "...\Farmer First_cleaned.dta"
+global output "..."
 
-****Run Categorical OLS Regressions****
+*******************
+//Prepare Data
+*******************
 
-use "$input
+use "$input"
 
-**Drop 63 same-sex households in both Tanzania & Mali
+**Drop same-sex households
 drop if inlist(Main, 1353, 1375, 1409, 1456, 1462, 1467, 1541, 1551, 1614, 1728, 1792, 1887, 2001, 2004, 2024, 2086, 2111, 2184, 2195, 2259, 2325, 2332, 2339, 2346, 2350, 2351, 2385, 2432, 2439, 2505, 2725, 2761, 2785, 2949, 2958, 5026, 5035, 5045, 5083, 5179, 5200, 5368, 5461, 5541, 5579, 5614, 5626, 5707, 5733, 5799, 5817, 5827, 5965, 5978, 5988, 6009, 6011, 6028, 6166, 6232, 6263, 6759, 6762)
 
 
@@ -93,10 +95,11 @@ label define region1 1 "Dar es Salaam" 2 "Dodoma" 3 "Morogoro" 4 "Singida" 5 "Ta
 drop if country==0 & region==2
 replace region=22 if region==24 & country==0
 
-*Drop Tanzania observations to save as Mali dataset
-drop if country==1
+*******************
+//Regressions
+*******************
 
-//Regression Series 1: with relative time poverty variable 
+//Regression Series 1:  
 eststo work_injury3: xi: regress risk_work_injury gender_fem age num_children_u15 income_secure timepoverty_rel b_educationlevel health ///
 	att_tell_others att_cant_avoid_misfortune att_no_advice_others optimism risk_seeking att_self_learn network_strength net_strength_cell lgstock_num fowlbees_num crop_count if country==0
 eststo extreme_weather3: xi: regress risk_extreme_weather gender_fem age num_children_u15 income_secure timepoverty_rel b_educationlevel health ///
@@ -289,8 +292,7 @@ eststo conflict: logit b_risk_conflict gender_fem age num_children_u15 income_se
 	
 	esttab work_injury extreme_weather community_relation debt lack_buyers conflict using LOGIT_OLDdata_NOladderrank_marginaleffects.rtf, replace ///
 	label nonumbers mtitles("Work injury" "Extreme weather" "Community relation" "Debt" "Lack of buyers" "Conflict") ///
-	eform se(4) pr2 onecell
-	pr2 ar2 onecell
+	eform se(4) pr2 ar2 onecell
 	
 *Regression sample summary statistics for crops grown, ethnicity, income type
 *using the regression for "Community Relations" because it has the largest number of observations (out of the six risk domains)
